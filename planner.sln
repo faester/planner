@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "planner", "planner\planner.ccproj", "{689205D6-1BC3-4D4B-93E3-0EA8DA8F0C1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlannerService", "PlannerService\PlannerService.csproj", "{DDE06490-8E84-4524-8F02-7E71C9A4BBB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlannerServiceTests", "PlannerServiceTests\PlannerServiceTests.csproj", "{E6E49A20-BB22-45B0-86A6-2AE30FF0B5DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{689205D6-1BC3-4D4B-93E3-0EA8DA8F0C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{689205D6-1BC3-4D4B-93E3-0EA8DA8F0C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{689205D6-1BC3-4D4B-93E3-0EA8DA8F0C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{689205D6-1BC3-4D4B-93E3-0EA8DA8F0C1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE06490-8E84-4524-8F02-7E71C9A4BBB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE06490-8E84-4524-8F02-7E71C9A4BBB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE06490-8E84-4524-8F02-7E71C9A4BBB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE06490-8E84-4524-8F02-7E71C9A4BBB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E49A20-BB22-45B0-86A6-2AE30FF0B5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E49A20-BB22-45B0-86A6-2AE30FF0B5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E49A20-BB22-45B0-86A6-2AE30FF0B5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E49A20-BB22-45B0-86A6-2AE30FF0B5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
