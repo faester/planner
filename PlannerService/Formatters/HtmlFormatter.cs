@@ -43,17 +43,17 @@ namespace PlannerService.Formatters
             return canWrite;
         }
 
-        public override System.Threading.Tasks.Task WriteToStreamAsync(Type type,
-            object value,
-            Stream stream,
-            HttpContentHeaders contentHeaders,
+        public override System.Threading.Tasks.Task WriteToStreamAsync(Type type, 
+            object value, 
+            Stream writeStream, 
+            System.Net.Http.HttpContent content, 
             System.Net.TransportContext transportContext)
         {
             var task = System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
                 var converter = _converters[type]();
-                converter.Encode(value, stream);
-                stream.Flush();
+                converter.Encode(value, writeStream);
+                writeStream.Flush();
             });
 
             return task;
