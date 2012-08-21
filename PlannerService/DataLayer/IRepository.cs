@@ -16,7 +16,7 @@
        
         T Get(string identifier, string parentID);
 
-        void Delete(T item);
+        void Delete(string id, string parentId);
 
         void Add(T item);
 

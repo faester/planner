@@ -20,6 +20,12 @@ namespace PlannerService
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            routes.MapHttpRoute(
+                name: "DefaultCompositeApi",
+                routeTemplate: "api/{controller}/{parentId}/{id}",
+                defaults: new { parentId = Models.RootItem.Root.Identifier, id = RouteParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿namespace PlannerService.Formatters
+{
+    using System.ComponentModel.Composition;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using PlannerService.Models;
 
-namespace PlannerService.Formatters
-{
-    [Export(typeof(PlannerService.Formatters.HtmlFormatter.HtmlConverter))]
+    [Export(typeof(HtmlFormatter.HtmlConverter))]
     public class PersonConverter : AbstractConverter<Person>
     {
         protected override Person DoDecode(System.IO.Stream s)
@@ -17,6 +13,7 @@ namespace PlannerService.Formatters
             Person p = new Person();
             using (StreamReader reader = new StreamReader(s))
             {
+                throw new System.NotImplementedException();
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();

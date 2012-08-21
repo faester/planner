@@ -1,5 +1,4 @@
-﻿using PlannerService.DataLayer;
-namespace EventService.DataLayer
+﻿namespace PlannerService.DataLayer
 {
     using System;
     using System.Collections.Generic;
@@ -139,17 +138,15 @@ namespace EventService.DataLayer
             return query.ToArray();
         }
 
-        public void Delete(EventDomainType item)
+        public void Delete(string id, string parentId)
         {
             TableServiceContext context = CreateContextInstance();
 
             var query = context.CreateQuery<TableServiceEntityType>(TABLE_NAME);
 
-            var tableItem = Convert(item);
-
             context.DeleteObject(query.Where(
-                x => x.RowKey == tableItem.RowKey 
-                && x.PartitionKey == tableItem.PartitionKey).First()
+                x => x.RowKey == id 
+                && x.PartitionKey == parentId).First()
                 );
 
             context.SaveChanges();

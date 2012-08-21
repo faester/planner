@@ -66,12 +66,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.1.12217, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services.Client" />
@@ -87,7 +84,6 @@
     </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -130,6 +126,9 @@
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5.1\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
@@ -139,11 +138,27 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="DataLayer\TableEntityType\TSEvent.cs" />
+    <Compile Include="DataLayer\TableEntityType\TSType.cs" />
+    <Compile Include="PlannerConfiguration.cs" />
+    <Compile Include="Controllers\AbstractController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Conversion\IConverter.cs" />
+    <Compile Include="DataLayer\ILogger.cs" />
+    <Compile Include="DataLayer\IRepository.cs" />
+    <Compile Include="DataLayer\TableStorageRepository.cs" />
+    <Compile Include="Exceptions\DublicateObjectIdentifierException.cs" />
     <Compile Include="Formatters\AbstractConverter.cs" />
+    <Compile Include="Formatters\Conversion\HtmlPropertyInfo.cs" />
+    <Compile Include="Formatters\Conversion\PropertyInfoToHtmlConverter.cs" />
     <Compile Include="Formatters\HtmlFormatter.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\IdentifiableObject.cs" />
+    <Compile Include="Models\IEventObject.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Formatters\PersonConverter.cs" />
     <Compile Include="Global.asax.cs">
@@ -151,6 +166,8 @@
     </Compile>
     <Compile Include="Handlers\TestHandler.cs" />
     <Compile Include="HtmlFormater.cs" />
+    <Compile Include="Models\RootItem.cs" />
+    <Compile Include="Models\ScheduleItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>

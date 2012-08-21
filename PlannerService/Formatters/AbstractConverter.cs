@@ -27,7 +27,13 @@
                 WriteHeadContent(writer);
                 writer.RenderEndTag();
                 writer.RenderBeginTag(HtmlTextWriterTag.Body);
+                writer.AddAttribute("METHOD", "POST");
+                writer.RenderBeginTag(HtmlTextWriterTag.Form);
                 WriteToStream((T)obj, writer);
+
+                writer.AddAttribute(HtmlTextWriterAttribute.Type, "submit");
+                writer.RenderBeginTag(HtmlTextWriterTag.Input);
+                writer.RenderEndTag();
                 writer.RenderEndTag();
                 writer.RenderEndTag();
                 writer.Flush();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -29,12 +30,13 @@ namespace PlannerService.Formatters
         public HtmlFormatter()
         {
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/x-www-form-urlencoded"));
         }
 
         public override bool CanReadType(Type type)
         {
-            var canWrite = _converters.ContainsKey(type);
-            return canWrite;
+            var canRead = _converters.ContainsKey(type);
+            return canRead;
         }
 
         public override bool CanWriteType(Type type)
@@ -43,10 +45,10 @@ namespace PlannerService.Formatters
             return canWrite;
         }
 
-        public override System.Threading.Tasks.Task WriteToStreamAsync(Type type, 
-            object value, 
-            Stream writeStream, 
-            System.Net.Http.HttpContent content, 
+        public override System.Threading.Tasks.Task WriteToStreamAsync(Type type,
+            object value,
+            Stream writeStream,
+            System.Net.Http.HttpContent content,
             System.Net.TransportContext transportContext)
         {
             var task = System.Threading.Tasks.Task.Factory.StartNew(() =>
