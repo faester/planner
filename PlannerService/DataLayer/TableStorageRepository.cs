@@ -12,6 +12,27 @@
     using PlannerService.Conversion;
     using System.Data;
 
+    public class TableStorageRepository
+    {
+        static TableStorageRepository()
+        {
+            Account = CloudStorageAccount.DevelopmentStorageAccount;
+        }
+
+        static CloudStorageAccount Account { get; set; }
+
+        public static TableStorageRepositoryBase<TSType, PlannerType, ParentType>
+            Create<TSType, PlannerType, ParentType>(IConverter<TSType, PlannerType, ParentType> converter)
+            where ParentType : IdentifiableObject
+            where PlannerType : Models.IEventObject<ParentType>
+            where TSType : Microsoft.WindowsAzure.StorageClient.TableServiceEntity
+        {
+            return new TableStorageRepositoryBase<TSType, PlannerType, ParentType>(converter, 
+                Account
+                );
+        }
+    }
+
     public class TableStorageRepositoryBase<TableServiceEntityType, EventDomainType, ParentType>
         : IRepository<EventDomainType, ParentType>
         where EventDomainType : IEventObject<ParentType>
@@ -22,27 +43,7 @@
 
         CloudStorageAccount StorageAccount { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of the TableStorageRepositoryBase class.
-        /// </summary>
-        public TableStorageRepositoryBase(
-                    Converter<EventDomainType, TableServiceEntityType> eventToCloudTypeConverter,
-                    Converter<TableServiceEntityType, EventDomainType> cloudTypeToEventConverter)
-        {
-            if (cloudTypeToEventConverter == null)
-            {
-                throw new ArgumentNullException("cloudTypeToEventConverter");
-            }
-            if (eventToCloudTypeConverter == null)
-            {
-                throw new ArgumentNullException("eventToCloudTypeConverter");
-            }
-
-            this.eventToCloudTypeConverter = eventToCloudTypeConverter;
-            this.cloudTypeToEventConverter = cloudTypeToEventConverter;
-        }
-
-        public TableStorageRepositoryBase(IConverter<EventDomainType, TableServiceEntityType> converter, CloudStorageAccount storageAccount)
+        public TableStorageRepositoryBase(IConverter<TableServiceEntityType, EventDomainType, ParentType> converter, CloudStorageAccount storageAccount)
         {
             if (converter == null)
             {
@@ -61,7 +62,7 @@
 
         private Converter<EventDomainType, TableServiceEntityType> eventToCloudTypeConverter;
         private Converter<TableServiceEntityType, EventDomainType> cloudTypeToEventConverter;
-        private IConverter<EventDomainType, TableServiceEntityType> converter;
+        private IConverter<TableServiceEntityType, EventDomainType, ParentType> converter;
 
         private ILogger Logger { get; set; }
 
