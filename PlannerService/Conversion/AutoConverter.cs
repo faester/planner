@@ -11,9 +11,19 @@ namespace PlannerService.Conversion
         public static IConverter<TsT, PlT, PaT> Create<TsT, PlT, PaT>()
             where TsT : Microsoft.WindowsAzure.StorageClient.TableServiceEntity
             where PlT : Models.IEventObject<PaT>
-            where PaT : Models.IdentifiableObject
+            where PaT : Models.IdentifiableObject, new()
         {
-            var mapper = AutoMapper.Mapper.CreateMap<TsT, PlT>();
+            var t2pmap = AutoMapper.Mapper.CreateMap<TsT, PlT>()
+                .ForMember(plt => plt.Identifier, opt => opt.MapFrom(src => src.RowKey))
+                .ForMember(plt => plt.Parent.Identifier, opt => opt.MapFrom(src => src.PartitionKey));
+
+            var p2tmap = AutoMapper.Mapper.CreateMap<PlT, TsT>()
+                .ForMember(t => t.PartitionKey, opt => opt.MapFrom(src => src.Parent.Identifier))
+                .ForMember(t => t.RowKey, opt => opt.MapFrom(src => src.Identifier));
+
+            p2tmap.BeforeMap((t, p) =>  {
+                t.Parent = new PaT();
+            });
 
             return new AutoMapperConverter<TsT, PlT, PaT>
             (

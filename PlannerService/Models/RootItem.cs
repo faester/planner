@@ -11,13 +11,19 @@ namespace PlannerService.Models
         public string Identifier
         {
             get;
-            private set;
+            set;
         }
 
-        private RootItem() { }
+        public RootItem() {
+            Identifier = Root.Identifier;
+        }
+
+        private RootItem(string id)
+        {
+            Identifier = id;
+        }
 
         public static readonly RootItem Root
-            = new RootItem() { Identifier = "root" };
-        
+            = new RootItem("root");
     }
 }

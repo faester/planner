@@ -10,7 +10,7 @@ namespace PlannerService.Controllers
 {
     public abstract class AbstractController<T, ParentType> : ApiController
         where T : Models.IEventObject<ParentType>
-        where ParentType : IdentifiableObject
+        where ParentType : IdentifiableObject, new()
     {
         protected abstract DataLayer.IRepository<T, ParentType> CreateRepository();
 
@@ -27,8 +27,15 @@ namespace PlannerService.Controllers
         }
 
         // POST api/abstract
-        public void Post(T value)
+        public void Post(string parentId, T value)
         {
+            if (value.Parent == null)
+            {
+                value.Parent = new ParentType();
+            }
+
+            value.Parent.Identifier = parentId;
+
             CreateRepository().Add(value);
         }
 
@@ -37,8 +44,9 @@ namespace PlannerService.Controllers
         {
             if (value == null) { throw new ArgumentNullException("value"); }
             if (value.Parent == null) { throw new ArgumentNullException("parent"); }
-            if (value.Identifier != id) { throw new ArgumentException("id"); }
-            if (value.Parent.Identifier != id) { throw new ArgumentException("parent.id"); }
+
+            value.Identifier = id;
+            value.Parent.Identifier = parentId;
 
             CreateRepository().Update(value);
         }

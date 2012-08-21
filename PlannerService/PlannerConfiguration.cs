@@ -21,14 +21,19 @@ namespace PlannerService
             set;
         }
 
-        internal static DataLayer.IRepository<Event, RootItem> CreateEventRepository()
+        internal DataLayer.IRepository<Event, RootItem> CreateEventRepository()
         {
-            return DataLayer.TableStorageRepository.Create(Conversion.AutoConverter.Create<TSEvent, Event, RootItem>());
+            return DataLayer.TableStorageRepository.Create(new EventConverter());
         }
 
-        internal static DataLayer.IRepository<ScheduleItem, Event> CreateScheduleRepository()
+        internal DataLayer.IRepository<ScheduleItem, Event> CreateScheduleRepository()
         {
-            return DataLayer.TableStorageRepository.Create(Conversion.AutoConverter.Create<TSSchedule, ScheduleItem, Event>());
+            return DataLayer.TableStorageRepository.Create(new ScheduleConverter());
+        }
+
+        internal DataLayer.ILogger GetLogger(Type type)
+        {
+            return new ConsoleLogger();
         }
     }
 }

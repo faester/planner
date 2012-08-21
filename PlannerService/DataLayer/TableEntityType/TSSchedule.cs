@@ -9,10 +9,10 @@ namespace PlannerService.DataLayer.TableEntityType
         : Microsoft.WindowsAzure.StorageClient.TableServiceEntity
         , RepositoryItem<Models.ScheduleItem, Models.Event> 
     {
-        DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
-        DateTime EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
-        string Description { get; set; }
+        public string Description { get; set; }
     }
 }

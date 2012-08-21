@@ -12,12 +12,23 @@
     {
         public Event Convert(TSEvent source)
         {
-            throw new NotImplementedException();
+            var target = new Event();
+            target.Identifier = source.RowKey;
+            target.Parent = new RootItem();
+            target.Parent.Identifier = source.PartitionKey;
+            
+            return target;
         }
 
         public TSEvent Convert(Event source)
         {
-            throw new NotImplementedException();
+            var target = new TSEvent();
+
+            target.PartitionKey = source.Parent.Identifier;
+            target.RowKey = source.Identifier;
+            target.Timestamp = DateTime.UtcNow;
+
+            return target;
         }
     }
 }

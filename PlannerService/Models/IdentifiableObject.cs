@@ -7,6 +7,6 @@ namespace PlannerService.Models
 {
     public interface IdentifiableObject
     {
-        string Identifier { get; }
+        string Identifier { get; set; }
     }
 }

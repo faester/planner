@@ -12,10 +12,10 @@
 
         public Event Parent { get; set; }
 
-        DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; }
  
-        DateTime EndTime { get; set; }
+        public DateTime EndTime { get; set; }
         
-        string Description { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -10,16 +10,31 @@
     public class ScheduleConverter
         : IConverter<TSSchedule, ScheduleItem, Event>
     {
-
-
         public ScheduleItem Convert(TSSchedule source)
         {
-            throw new NotImplementedException();
+            ScheduleItem target = new ScheduleItem();
+
+            target.Parent = new Event();
+            target.Parent.Identifier = source.PartitionKey;
+            target.Identifier = source.RowKey;
+            target.EndTime = source.EndTime;
+            target.StartTime = source.StartTime;
+            target.Description = source.Description;
+
+            return target;
         }
 
         public TSSchedule Convert(ScheduleItem source)
         {
-            throw new NotImplementedException();
+            TSSchedule target = new TSSchedule();
+
+            target.PartitionKey = source.Parent.Identifier;
+            target.RowKey = source.Identifier;
+            target.EndTime = source.EndTime;
+            target.StartTime = source.StartTime;
+            target.Description = source.Description;
+
+            return target;
         }
     }
 }

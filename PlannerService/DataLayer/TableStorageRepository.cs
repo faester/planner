@@ -27,9 +27,13 @@
             where PlannerType : Models.IEventObject<ParentType>
             where TSType : Microsoft.WindowsAzure.StorageClient.TableServiceEntity
         {
-            return new TableStorageRepositoryBase<TSType, PlannerType, ParentType>(converter, 
+            var ts = new TableStorageRepositoryBase<TSType, PlannerType, ParentType>(converter, 
                 Account
                 );
+
+            ts.Init();
+
+            return ts;
         }
     }
 
@@ -76,7 +80,7 @@
 
         public void Init()
         {
-            //Logger = WebRole.GetLogger(GetType());
+            Logger = PlannerConfiguration.Configuration.GetLogger(GetType());
 
             Logger.Debug("Creating table client");
             var client = CreateTableClient();
@@ -104,8 +108,11 @@
 
             var items = query.Where(x => x.PartitionKey == parentID.ToString());
 
-            return from s in items
-                   select cloudTypeToEventConverter(s);
+            var result = items.Select(i => cloudTypeToEventConverter(i));
+
+            var arr = result.ToArray();
+
+            return arr;
         }
 
         public EventDomainType Get(string identifier, string parentIdentifier)

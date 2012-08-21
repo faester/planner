@@ -9,6 +9,5 @@
     public class TSEvent : Microsoft.WindowsAzure.StorageClient.TableServiceEntity
         , RepositoryItem<Event, RootItem>
     {
-        public string Identifier { get; set; }
     }
 }
